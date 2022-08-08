@@ -1,0 +1,51 @@
+HW4 Common Mistakes:
+====================
+
+Q1:
+Since Knapsack problem is O(nW) --- pseudo-polynomial time,
+some student use it to show that Knapsack problem is in NP.
+This is not correct.
+
+Some students make two transformations.
+One is from Knapsack to Subsetsum
+One is from Subsetsum to Knapsack.
+Note that we should have one transformation only.
+
+
+Q2:
+Give mark if there is
+1) The definition of the recursive formula. (2 marks)
+2) The base case (2 marks) and recursive case (2 marks)
+3) The DP algorithm (2 marks)
+4) The running time analysis (2 marks)
+
+A number of students just give the DP algorithm with no recursive formula.
+
+Some students give a recursive algorithm instead of top-down DP.
+
+Some students do not state the base case.
+
+Many students just state Count(n) = min{ Count(n - c_j) | c_j <= n }.
+It is not correct.
+It should be  Count(n) = min{ infinity, min { Count(n - c_j) | c_j <= n } }.
+
+
+Q3: Coin Changing Again
+=======================
+a) Mistakes on proving correctness for greedy:
+- Some students mentioned that greedy works because denominations are multiple of each other. This is still not clear why it works. (You think you can prove the advanced question in last semester?)
+
+- Some students gave argument, but their argument can be applied for part (b) exactly. Thus, that argument should not be correct.
+
+- For this question, the best proof is to prove by case study: 	Prove that greedy gives exact the same solution as optimal solution for all cases: x<=5, x<=10, x<20, x>=20.	(This isn't applicable for b)
+
+b) To disprove, you need just give a counter example.
+
+- Some of you mentioned that the coin system in part b) doesn't satisfy condition that "denominations are multiple of each other", and thus greedy fails. In fact, that is not the the necessary condition for greedy to work.
+
+- Some mentioned "canonical system", but with wrong argurment.
+A coin change system is called canonical if the greedy strategy works for that system. It's not correct to say "greedy works/doesn't work because the system is/isn't canonical".
+
+- Note that, Fibonacci system is also a canonical system. That is, for set of denominations 1, 2, 3, 5, 8, 13, 21, ... (first k Fibonacci numbers), greedy also works.
+
+

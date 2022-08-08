@@ -1,0 +1,133 @@
+T10 - Greedy questions D3 and D4.
+T11 - Part a: Bin Packing NP-hardness.
+
+(By NNN - not guaranteed to be correct!)
+
+T10- D3[Greedy Gas Station]
+===========================
+a)
+V(i) = 1 + min(V[j]) such that di - dj <= C and j<i;
+
+b) 
+d0 = 0; A is 0-th station, B is n-th station.
+
+Greedy choice:
+- Choose 0-th;
+- Suppose previous chosen stop is i-th station, (right after i-th station, the car's tank is full). The next stop is chosen at j-th station, such that it is the farthest station from i-th the car can go without refilling the tank. That is the j-th station such that dj - di <=C and d(j+1) - di >C.
+- If the car can reach B without refilling: go to B and stop.
+
+Pseudo code: DIY. Running time should be O(n);
+
+c) Prove that the greedy choice is optimal:
+
+- Let denote greedy  choices by: G = {g1, g2, ..., g(k-1), gk, ...}
+- Let denote optimal choices by: O = {o1, o2, ..., o(k-1), ok, o(k+1), ...om},  m stops in total.
+
+- Assume that gk is the first greedy choice that different from optimal choice ok, i.e. g1 = o1, g2 = o2, ..., o(k-1) = g(k-1), but o(k) != g(k)
+
+- Reconstruct another solution from the optimal solution by replacing optimal choice ok by gk: O' = O - {ok} + {gk}, that is:
+	O' = o1, o2, ..., o(k-1), gk, o(k+1), ...om
+
+- We prove that O' is also optimal:
+	Point 1. O' has same total number m of stops;
+	Point 2. O' is a valid solution: that is: dgk - do(k-1) <= C, and do(k+1) - dgk <= C;
+
+		According to the greedy choice for the gk: gk is the farthest station from g(k-1) = o(k-1) that the car can go without refilling gas, it means that: dgk >= dok.
+
+		Since dgk >= dok, we have do(k+1) - dgk <= do(k+1) - dok <= C, thus do(k+1) - dgk <= C
+
+		We have dgk - do(k-1) = dgk - dg(k-1) <= C, thus dgk - do(k-1) <= C
+
+		In other words, O' is a valid solution and as good as optimal solution.
+
+- O' is also optimal, means our greedy choice gk is as good as optimal choice ok.
+
+- Thus, greedy is optimal.
+
+
+T10- D4 [Greedy Knapsack]
+=========================
+a). Greedy strategy:
+- If k-th is smallest/lightest item that can be chosen next, choose k-th item.
+
+- In other words, choose all first m items that sum of all wi < W, i = 1..m.
+
+b) Proof:
+
+- Let denote greedy  choices by: G = {g1, g2, ..., g(k-1), gk, ...}
+- Let denote optimal choices by: O = {o1, o2, ..., o(k-1), ok, o(k+1), ...om},  Value of optimal solution is V(O) = sum of all v_oi, i = 1..m.
+
+- Assume that gk is the first greedy choice that different from optimal choice ok, that is: g1 = o1, g2 = o2, ..., o(k-1) = g(k-1), but o(k) != g(k)
+
+- Reconstruct another solution from the optimal solution by replacing optimal choice ok by gk: O' = O - {ok} + {gk}, that is:
+	O' = o1, o2, ..., o(k-1), gk, o(k+1), ...om
+
+- We prove that O' is not worse than optimal:
+	Point 1. O' is a valid solution: 		
+		According to greedy choice (choose smallest/lightest item first): Wgk <= Wok, thus the total weight of O' does not exceed W.
+	Point 2. O' has value not worse than that of O: 
+		Since Wgk <= Wok, this only happens when Vgk >= Vok (because w1 <= w2 <=...<= wn and v1 >= v2 >=...>= vn)
+		Thus, total value V(O') >= V(O)
+
+- O' is not worse than optimal, means our greedy choice gk is not worse than optimal choice ok.
+
+- Thus, greedy is optimal.
+
+b') For the case: w1 < w2 <...< wn and v1 > v2 >...> vn:
+Almost the same argument.
+After reconstruct O', we argue that V(O')  strictly > V(O). That's a contradiction to the fact that O is optimal. Thus, our assumption is wrong. That means greedy cannot be different than optimal.
+
+
+
+
+T11 - Question D1a: Prove BinPack is NP-hard.
+=============================================
+(Note: the question requires prove NP-hard, not NP-complete, so no need to show BinPack is in NP.
+In fact, this BinPack is not decision problem, it is optimization problem.
+Usually,  NP-Complete class considers decision problems; NP-hardn -- optimizaton problems.
+Thus, sometimes saying that "TSP is NP-Complete" is not really correct. TSP is NP-hard problem. 
+Or you need to clarify which TSP version (decision or optimization) you are talking about.
+Read this article:
+https://www.ibm.com/developerworks/community/blogs/jfp/entry/no_the_tsp_isn_t_np_complete?lang=en
+).
+
+General hint: reduction from Partition.
+Idea: when you have 2 equal partitions (each sums up to P), how can you relate that to BinPack? 
+Consider a partition is a bin of size P, then you have 2 full bins.
+In BinPack, size of bin is of unit size, thus you have to transform size P into unit size.
+This can be done by divide each number by P (or 2P). OK, let's see a detailed proof.
+
+
+Consider PARTITION problem:
+PARTITION: Given a set of n positive integers A = {a1, a2, ..., an}. Decide if the set A can be partitioned into 2 subsets of equal sum.
+We know that PARTITION is NP-hard.
+
+Consider following transformation T that transforms a PARTITION instance into BinPack instance:
+PARTITION instance: A = {a1, a2, ..., an}, n positive numbers;
+Let C = sum of all ai, i = 1..n
+
+Transform it into BinPack instance:
+B = {s1, s2, ..., sn) where: si = 2*ai / C. 
+
+Obviously this transformation is polynomial time (in fact, it's O(n): just compute C, then compute each item si).
+
+Now we prove that: PARTITION is yes if only if BinPack can pack n items into 2 bins.
+(A can be partitioned into 2 equal parts if and only if B can be packed into 2 bins)
+
+"=>": if A can be partitioned into 2 equal parts:
+Let 2 partitions be:
+p1 = {a11, a12, ..., a1m}
+p2 = {a21, a22, ..., a2k}
+we have: sum of all a_1_i equal to sum of all a2j = P = C/2.
+
+Then, we can show that, B can be packed into 2 bins:
+b1 = {s11, s12, ..., s1m}
+b2 = {s21, s22, ..., s2k}
+This is true, because: 
+	+ sum of items in b1 is: S1 = s11 + s12 + ...+ s1m = 2/C * (a11 + a12 + ...+a1m) = 2*P / C = 1.
+	Thus all items in b1 can packed into unit-size bin.
+	+ same for b2.
+
+Thus, B can be packed into 2 bins. ( "=>" is proved.)
+
+"<=": DIY.

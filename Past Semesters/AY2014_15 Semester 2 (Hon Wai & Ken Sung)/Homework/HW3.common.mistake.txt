@@ -1,0 +1,43 @@
+HW3 Common Mistakes:
+
+S1: Decision Tree:
+=================
+a)
+- Height of the tree must be an integer!
+
+b)
+- Some trees are not balanced, thus height is >5.
+- Should be very careful and should check your own tree.
+
+S2: Amortized Analysis 
+======================
+a)
+- You need to give pseudo code.
+- Some of you tried to sort the elements to find the min. That's wrong. Then operations are never be constant amortized anymore.
+- Some of you didn't use the variable MV given.
+
+b) 
+- Most of you didn't use the fact that Median-find algorithm runs in time ≤ Dn for some fixed constant D. The constant D should appear in your analysis. 
+
+- Some of you didn't analyze 3 operations together. For amortized analysis, an operation can be any of 3 given kinds. And operations can happen in any order. 
+
+- If you need to do partition before delete elements, you need to account for the cost of partition as well. Partition takes <= Pn time, for some fixed constant P. You can say P = 1 here. But in fact, you don't need doing partition since the Median-Find will do partition as its internal procedure. 
+
+- For accounting: insert pays all the cost, find-min and delete-large-half are free (or cost 1$). The intuition behind is that, only insert can increase the size of the set. Thus, when insert an element x, we deposit some "money" for x, so that later operations that affect on x, x has enough $ to pay.
+
+- For accounting method: you have to prove the invariant that each element in the set always has at least (2D+2P)$ deposited, regardless before or after deletion/insertion/findmin.
+
+
+S3: P, NP, co-NP
+================
+For shortest path 1, shortest path 2 and Euler cycle, many students do not know they are in NP and co-NP.
+
+For Longest path 1, many students do not know it is not in NP. It is actually in co-NP. Some student said it is NP-hard. However, NP-hard does not mean the problem is in NP or in co-NP.
+
+For Longest path 1 & 2, some students said they are in NP since it can be reduced from Hamiltonian cycle. To show a problem is in NP or co-NP, we need a certificate. The proof is not based on reduction.
+
+For Longest path 1 & 2, some students said they are none of the above. Instead, the problem is NP-complete.
+
+1 mark will be deduced for each mistake.
+
+

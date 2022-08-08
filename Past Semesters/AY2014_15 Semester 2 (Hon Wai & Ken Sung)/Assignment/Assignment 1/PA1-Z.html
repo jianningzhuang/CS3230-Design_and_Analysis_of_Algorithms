@@ -1,0 +1,74 @@
+<html>
+<h1 align=center>
+Testing Mooshak Online Judge System
+</h1>
+<p>
+This is just a simple problem for you to test the online judge.
+</p>
+<p>
+Login into this server:<br>
+<big>
+http://algorithmics.comp.nus.edu.sg/~cs3230oj/
+</big>
+<br>
+using your username and password sent to your nus email.
+<br>
+Choose contest name: CS3230_Jan15 PA1 - task Z
+<br>
+
+Then solve following problem:
+
+<h2>
+Task Z
+</h2>
+<p>
+Given two integers, compute and output their sum. The absolute value of numbers in input is less than 2147483640.
+</p>
+There are two test inputs:
+<br>
+Test 1 (10 points):
+<pre>
+1000000000
+1000000000
+</pre>
+Test 2 (20 points):
+<pre>
+2000000000
+2000000000
+</pre>
+<p>
+Try following C++ code to submit:
+</p>
+<pre>
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{	int x, y;
+	
+	cin >>x>>y;
+	cout << x+y << endl;
+	return 0;
+}
+</pre>
+
+Above code will get Result:
+<b><pre>10 Wrong Answer</pre></b>
+<br>
+Try to guess why it's wrong (?).
+<br><br>
+Following C++ code will get "Accepted":
+<pre>
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{	long long x, y;
+	
+	cin >>x>>y;
+	cout << x+y; // without << endl;
+	return 0;
+}
+</pre>
+(End of problem's description.)
+</html>

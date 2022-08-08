@@ -1,0 +1,103 @@
+Midterm Common Mistakes:
+(CS3230-Spring2015)
+
+Bonus Question:
+==============
+Remember, it's Non-deterministic Polynomial Time, not Non-Polynomial Time.
+The former implies that something about the problem "is polynomial time".
+The latter implies that something about the problem "isn't polynomial time".
+Note how they mean opposite things. The former is true, the latter is not, hence the name.
+
+Question 1:
+===========
+1a)
+This question is actually pretty difficult (due to the difficult-to-evaluate expressions)
+Many did not notice that g2 and g3 are in fact both \Theta(nlgn).
+We cannot evaluate g1 exactly. However, we know that it is between n^2 and n^3.
+Most students are aware that g4 is the largest. However, this is still non-trivial, and if you aren't aware that g4 is NOT exponential, try working out what g4 is yourself, and note that it is actually around \Theta(n^6.91)
+
+The answer is: g2 = g3 << g1 << g4.
+
+1b)
+Most students got this question correct.
+Marks were deducted if one does not explain why the sumnation is less than or equal to 100n^2.
+Some students tried to "cheat" by writing from the start that 100sum(k) is \Theta(n^2), and thus can be regarded as n^2. This is not how one proves by definition.
+
+1c)
+Most students got this question correct.
+Two most common mistakes:
+1 - Conceptual error: Some students computed the limit of ln n^3, and somehow used "L'Hopital's Rule" to deduce that ln n^3 tends to 0 as n tends to infinity. This is the wrong approach, and the application of L'Hopital's rule here is incorrect.
+The correct approach is to compute the limit of (ln n^3) / n.
+
+2 - Differentiating wrongly: Many students made careless mistakes in their differentiation. Most common is d/dn ln n^3 = 1/n^3. (forgetting the inner term in the chain rule). One mark was deducted for this.
+
+Question 2:
+===========
+For 2(a), most of the student try to prove the statement.
+In fact the statement is not correct.
+If you try to show the statement is correct, you will get 0 mark.
+
+A few students prove the following two statements.
+(1) c' a^{f(n)} >= a^{g(n)}
+(2) (a^{f(n)})^c >= a^{g(n)}
+Then, they said c' a^{f(n)} may not always greater than a^{f(n)}
+and conclude the statement is not true.
+For such an answer, you will get 2 marks.
+
+For 2(b)(i), many student use an incorrect case of master theorem.
+Then, they show that R(n) = O(n^{0.5} log n).
+Those students will get 0 marks.
+
+For 2(b)(ii), if you can show that
+T(n) = T(n/2) + 5n and T(n)=Theta(n). You can get 1 mark.
+If you also can show that S(n) = O(n), you will get 3 marks.
+
+For 2(b)(iii),
+If you can show that V(n) = Theta(n log n), you will get 1 mark.
+For the recursive formula for U(n), if you can substitute V(3n/4) by c n log n, you will get another 1 mark.
+If you can show U(n)=Theta(n^2), you will get full marks.
+
+
+Question 3 [On stable marriage]
+===============================
+Comments and Common mistake:
+1. Most people get (a). But often, they WRITE TOO MUCH
+    and do not know how to argue in a CLEAR and CONCISE manner.
+
+2. It is not right to follow the GS algorithm for this problem.
+    GS gives only one type of matching (in fact a unique matching),
+    but the question say ANY stable matching.
+    So, if you argue using GS algorithm, your "proof" is not general enough.
+
+3. Some give proof-by-example. They just gave one or more example
+    and then argue that "the general case, will be true too".
+    Some don't even say that. Just the example.
+    PROOF-by-example are INVALID proofs.
+
+
+Question 4:
+===========
+Part a) Tri-partition:
+----------------------
+1.	Most common mistake: Forget to state/analyse running time.
+	Although analys of running time for this algorithm is trivial, but you have to analyze it anyway. It's needed for part b when you write recurrence.
+
+2.	Return value: Wrong return or forget to return any value.
+	As two-way partitioning returns the position of the pivot, the tri-partitioning must return 2 positions of the two pivots.
+	This return is needed for quick-sort recursion.
+
+3.	Partitioning idea: 
+	+ Not so-good idea: put 3 regions (small, medium, large) next to each other in the front, the unknown region at the end.
+	This idea works, but you have to make TWO exchanges when the currently considering number belongs to the small region.
+	If you make only 1 exchange for that, it doesn't work!
+
+	+ The better idea: put large region at the end, small and medium regions next to each other in front, unknown region in the middle.
+	Then you have only do at most 1 exchange for each comparison.
+
+	+ Other free solution: Use 2 times of standard two-way partitions, for each pivot separately.
+
+Part b) Best case quick sort with tri-partition:
+-------
+1.	Forgot to answer when/what is the best case. The best case happens when EVERY tri-partition splits the array into 3 EQUAL parts. 
+2.	Some students got wrong recurrence, and forgot to justify the time for tri-partitioning.
+3.	Some students gave answer for wrong question (best case of standard quick sort). The midterm question is about best case of quick sort WITH tri-partition.
